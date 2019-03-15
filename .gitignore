@@ -12,3 +12,4 @@ coverage
 RELEASE_NOTE*.md
 dist/*.js
 .vscode
+dist
