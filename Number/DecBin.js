@@ -43,4 +43,4 @@ function decimalDec10bin(decimals) {
   return '';
 }
 
-console.log(decimalDec10bin(decimalDec2bin(0.14));
+console.log(decimalDec10bin(decimalDec2bin(0.14)));
