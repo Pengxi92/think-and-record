@@ -1,11 +1,11 @@
 var http = require("http");
 var fs = require("fs");
 
-var firstUrl = 'http://mi.shenbiedu.com/teemm/20181022/9001.jpg';
+var firstUrl = '';
 
-var count = 272;
+var count = 10;
 
-var imgNameLen = 4;
+var imgNameLen = 3;
 
 var imgWord = '';
 
@@ -18,11 +18,16 @@ var host = arr.join('/');
 
 var wordUrl = `/Users/bianlifeng/cos/${imgWord}`;
 
+let files = [];
 if (!fs.existsSync(wordUrl)) {
   fs.mkdirSync(wordUrl);
 } else {
   console.log('已存在该文件夹');
-  return;
+  files = fs.readdirSync(wordUrl);
+  if (files.length >= count) {
+    console.log('已下载完毕');
+    return;
+  }
 }
 
 var succImg = 0;
@@ -35,7 +40,9 @@ for (var i = 0; i < count; i++) {
     }, newImgName);
   }
   var imgName = `${newImgName}.jpg`;
-  var imgUrl = `${host}/${imgName}`;
+  if (files.indexOf(imgName) !== -1) continue;
+ 
+  var imgUrl = `${host}/${imgName}`;  
   imgObj[imgName] = imgName;
   (function getImg(imgName, imgUrl) {
     http.get(imgUrl, function(res){
@@ -53,10 +60,10 @@ for (var i = 0; i < count; i++) {
               console.log(`${wordUrl}/${imgName}`, "down success");
               delete imgObj[imgName];
               succImg++;
-              if (succImg === count) {
+              var imgArr = Object.keys(imgObj);
+              if (succImg === count || imgArr.length === 0) {
                 console.log("http end");
               } else {
-                var imgArr = Object.keys(imgObj);
                 console.log('剩余图片:', imgArr.length >= 5 ? imgArr.length : imgArr);
               }
           });
