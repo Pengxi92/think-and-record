@@ -1,6 +1,6 @@
 # 性能指标
 
-从 Web 性能工作组的[主页](https://www.w3.org/webperf/)可以看到全部的性能标准，我们也可以在[ALL STANDARDS AND DRAFTS](https://www.w3.org/TR/)搜索到这些标准。
+从 Web 性能工作组的[主页](https://www.w3.org/webperf/)可以看到全部的性能标准，我们也可以在[ALL STANDARDS AND DRAFTS](https://www.w3.org/TR/)（指标可能存在多个标签，具体标签说明见[这里](http://www.ayqy.net/blog/w3c%E8%A7%84%E8%8C%83%E5%88%B6%E5%AE%9A%E6%B5%81%E7%A8%8B/)）搜索到这些标准。
 
 # 性能度量
 
