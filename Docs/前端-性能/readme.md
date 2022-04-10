@@ -1,6 +1,8 @@
 # 性能指标
 
-从 Web 性能工作组的[主页](https://www.w3.org/webperf/)可以看到全部的性能标准，我们也可以在[ALL STANDARDS AND DRAFTS](https://www.w3.org/TR/)（指标可能存在多个标签，具体标签说明见[这里](http://www.ayqy.net/blog/w3c%E8%A7%84%E8%8C%83%E5%88%B6%E5%AE%9A%E6%B5%81%E7%A8%8B/)）搜索到这些标准。
+从 Web 性能工作组的[主页](https://www.w3.org/webperf/)可以看到全部的性能标准，我们也可以在[ALL STANDARDS AND DRAFTS](https://www.w3.org/TR/)。
+
+指标按照实现流程，存在多个进度标签。主要流程为WD(工作草案) -> CR(候选建议书) -> PR(提议建议书) -> REC(建议书)，具体标签说明见[这里](http://www.ayqy.net/blog/w3c%E8%A7%84%E8%8C%83%E5%88%B6%E5%AE%9A%E6%B5%81%E7%A8%8B/)。
 
 # 性能度量
 
@@ -31,3 +33,10 @@ performance.timeOrigin + performance.now() // 1640783020692.5
 
 Date.now() //1640783023713
 ```
+
+## Performance Timeline
+
+此标准对Performance 对象进行了扩展，
+
+当前标准包含两个版本 [Level 1](https://www.w3.org/TR/2013/REC-performance-timeline-20131212/) 和 [Level 2](https://www.w3.org/TR/2021/CR-performance-timeline-20211202/)。Level 1 目前是 REC 状态，Level 2 规范还在 CR 状态。
+
