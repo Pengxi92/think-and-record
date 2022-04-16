@@ -150,6 +150,8 @@ Function.prototype.myBind = function(content, ...args) {
   // noFun.prototype = this.prototype;
   // resFn.prototype = new noFun();
 
+  // 注：这里不直接使用resFn.prototype = this.prototype，是为了避免当修改resFn.prototype，不会污染this.prototype
+
   return resFn;
 };
 
