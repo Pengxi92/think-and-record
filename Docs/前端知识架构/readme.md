@@ -8,10 +8,10 @@
 
 ## 基础篇
 
-* [浏览器](./base/1.%E6%B5%8F%E8%A7%88%E5%99%A8.md)
-* [HTML](./base/2.HTML.md)
-* [CSS](./base/3.CSS.md)
-* [HTTP](./base/4.HTTP.md)
+* [1.浏览器](./base/%E6%B5%8F%E8%A7%88%E5%99%A8.md)
+* [2.HTTP](./base/HTTP.md)
+* [3.HTML](./base/HTML.md)
+* [4.CSS](./base/CSS.md)
 
 # 参考
 
