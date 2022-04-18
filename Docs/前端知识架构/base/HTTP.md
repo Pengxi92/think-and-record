@@ -20,8 +20,8 @@
 
 * HTTP/3：基于 UDP 实现了 QUIC 协议
 
-[前端基础篇之HTTP协议](https://juejin.cn/post/6844903844216832007)
-[（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系](https://juejin.cn/post/6844904100035821575)
+> [前端基础篇之HTTP协议](https://juejin.cn/post/6844903844216832007)<br>
+[（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系](https://juejin.cn/post/6844904100035821575)<br>
 [HTTP1.0、HTTP1.1 和 HTTP2.0 的区别](https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A?)
 
 # HTTP基础
@@ -44,7 +44,7 @@
 
 GET 和 POST 方法没有实质区别，只是报文格式不同。
 
-[都9102年了，还问GET和POST的区别](https://segmentfault.com/a/1190000018129846)
+> [都9102年了，还问GET和POST的区别](https://segmentfault.com/a/1190000018129846)
 
 ## 请求首部（仅记录一些常用的）
 
@@ -68,7 +68,7 @@ GET 和 POST 方法没有实质区别，只是报文格式不同。
   * Location 客户端重定向到某个 URL
   * Server 服务器名字：Apache Nginx
 
-  首部Range相关：[Http Range规范：简析html中视频无法拖动问题](https://juejin.cn/post/6871524945957634061)
+  > 首部Range相关：[Http Range规范：简析html中视频无法拖动问题](https://juejin.cn/post/6871524945957634061)<br>
   Keep-Alive相关：[HTTP协议头部与Keep-Alive模式详解](https://byvoid.com/zhs/blog/http-keep-alive-header/)
 ## 状态码
 
@@ -92,13 +92,13 @@ GET 和 POST 方法没有实质区别，只是报文格式不同。
 
 ## DNS
 
-[字节面试被虐后，是时候搞懂 DNS 了](https://juejin.cn/post/6990344840181940261)
+> [字节面试被虐后，是时候搞懂 DNS 了](https://juejin.cn/post/6990344840181940261)
 
 ## CDN
 
 CDN全称Content Delivery Network，即内容分发网络。其基本思路是尽可能避开互联网上有可能影响数据传输速度和稳定性的瓶颈和环节，使内容传输的更快、更稳定。
 
-[五分钟了解CDN](https://juejin.cn/post/6844903605888090125)
+> [五分钟了解CDN](https://juejin.cn/post/6844903605888090125)
 
 ## TCP的三次握手
 
@@ -111,13 +111,16 @@ CDN全称Content Delivery Network，即内容分发网络。其基本思路是�
 * localStorage
 * sessionStorage
 
+> [腾讯三面：Cookie的SameSite了解吧，那SameParty呢？](https://juejin.cn/post/7087206796351242248)<br>
+[面试官 -- 跨域请求如何携带 cookie ?](https://mp.weixin.qq.com/s/zE0iG0DNs52hyf3LrLXIbA) (注：评论说在IOS和低版本IE上可能不兼容)
+
 # 同源政策及跨域
 
 [同源政策及跨域解决方案简析](https://juejin.cn/post/6844903802303152142)
 
 # 缓存
 
-[HTTP 缓存别再乱用了！推荐一个缓存设置的最佳姿势！](https://mp.weixin.qq.com/s/43pa04szJ2zU_IyVP4LraQ)
+> [HTTP 缓存别再乱用了！推荐一个缓存设置的最佳姿势！](https://mp.weixin.qq.com/s/43pa04szJ2zU_IyVP4LraQ)<br>
 [深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
 
 # WebSocket
@@ -136,8 +139,8 @@ websocket与Http协议一样度是基于tcp的，都属于应用层的协议，w
 
 # URL
 
-[url的hash和HTML5的history模式](https://blog.csdn.net/weixin_43974265/article/details/112762367)
+> [url的hash和HTML5的history模式](https://blog.csdn.net/weixin_43974265/article/details/112762367)
 
 # 经典问题
 
-* [从URL输入到页面展现到底发生什么？](https://juejin.cn/post/6844903784229896199)
+> [从URL输入到页面展现到底发生什么？](https://juejin.cn/post/6844903784229896199)
