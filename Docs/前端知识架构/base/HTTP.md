@@ -21,9 +21,18 @@
 * HTTP/3：基于 UDP 实现了 QUIC 协议
 
 [前端基础篇之HTTP协议](https://juejin.cn/post/6844903844216832007)
+[（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系](https://juejin.cn/post/6844904100035821575)
 [HTTP1.0、HTTP1.1 和 HTTP2.0 的区别](https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A?)
 
 # HTTP基础
+
+## TCP 和 UDP的差别
+
+* TCP是面向连接的，UPD是无连接的，即发送数据前不需要先建立连接
+* TCP提供可靠的服务，通过TCP连接传送的数据，无差错，不丢失，不重复，且按序到达，UDP尽最大努力交付，即不保证可靠交付
+* tcp 可靠，面向连接，不会丢失数据因此适合大数据量的交换
+* 每一条TCP连接，只能是1对1的，UDP支持1对1，1对多，多对1，多对多的交互通讯
+* TCP的首部开销为20字节，而UDP的只有8字节
 
 ## HTTP报文
 
@@ -91,6 +100,10 @@ CDN全称Content Delivery Network，即内容分发网络。其基本思路是�
 
 [五分钟了解CDN](https://juejin.cn/post/6844903605888090125)
 
+## TCP的三次握手
+
+发送端发送一个带有SYN标志的数据包给对方，接收端收到后，回传一个带有SYN/ACK标志的数据包表示传达确认信息，发送端再回传一个带有ACK标志的数据包，代表“握手”结束。
+
 # web 存储
 
 * cookie
@@ -105,11 +118,22 @@ CDN全称Content Delivery Network，即内容分发网络。其基本思路是�
 # 缓存
 
 [HTTP 缓存别再乱用了！推荐一个缓存设置的最佳姿势！](https://mp.weixin.qq.com/s/43pa04szJ2zU_IyVP4LraQ)
+[深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
 
 # WebSocket
 
- 本质上是基于什么协议进行通信的（TCP / UDP）?
+ > 本质上是基于什么协议进行通信的（TCP / UDP）?<br/>
  在不兼容 WebSockect 的情况下如何做降级兼容处理？
+
+WebSocket是基于http协议的，或者说借用了http协议来完成一部分握手。基于一个websocket握手协议的实现，基本是有2个属性，Upgrade和Connection：
+
+```http
+Upgrade: websocket
+Connection: Upgrade
+```
+
+websocket与Http协议一样度是基于tcp的，都属于应用层的协议，websocket在建立握手连接时，数据是通过http协议传输的，但是在建立连接之后，真正的数据传输阶段是不需要http协议参与的。
+
 # 经典问题
 
 * [从URL输入到页面展现到底发生什么？](https://juejin.cn/post/6844903784229896199)
