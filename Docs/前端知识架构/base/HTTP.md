@@ -134,6 +134,10 @@ Connection: Upgrade
 
 websocket与Http协议一样度是基于tcp的，都属于应用层的协议，websocket在建立握手连接时，数据是通过http协议传输的，但是在建立连接之后，真正的数据传输阶段是不需要http协议参与的。
 
+# URL
+
+[url的hash和HTML5的history模式](https://blog.csdn.net/weixin_43974265/article/details/112762367)
+
 # 经典问题
 
 * [从URL输入到页面展现到底发生什么？](https://juejin.cn/post/6844903784229896199)
