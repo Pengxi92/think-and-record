@@ -47,6 +47,7 @@
 * call、apply、bind
 * ...
 
+[前端算法入门一：刷算法题常用的JS基础扫盲](https://juejin.cn/post/7087134135193436197)
 [解锁多种JavaScript数组去重姿势](https://juejin.cn/post/6844903608467587085)
 
 ## 性能差异
