@@ -8,14 +8,14 @@
 对象(Object)、函数(Function)。其他的还有数组(Array)、Date(日期)、RegExp(正则)等。
 保存在堆内存中，栈内存中保存堆内存数据的引用。
 
-[「前端进阶」JS中的栈内存堆内存](https://juejin.cn/post/6844903873992196110)
+> [「前端进阶」JS中的栈内存堆内存](https://juejin.cn/post/6844903873992196110)
 
 ## 数组是如何存储的
 
 * 同种类型数据的数组分配连续的内存空间
 * 存在非同种类型数据的数组使用哈希映射分配内存空间
 
-[ziyi2/data-structure-algorithm-procedure](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Hash.js)
+> [ziyi2/data-structure-algorithm-procedure](https://github.com/ziyi2/data-structure-algorithm-procedure/blob/master/src/Hash.js)
 
 ## 数据类型的判断
 
@@ -27,11 +27,11 @@
 
 ## 数据类型转换
 
-[JavaScript-强制类型转换](https://juejin.cn/post/6855920843260690440)
+> [JavaScript-强制类型转换](https://juejin.cn/post/6855920843260690440)
 
 ## 0.1 + 0.2 === 0.3
 
-[一次Javascript的计算浮点数精度问题记录](https://juejin.cn/post/6944243108410458149)
+> [一次Javascript的计算浮点数精度问题记录](https://juejin.cn/post/6944243108410458149)
 
 ## 函数相关
 
@@ -47,7 +47,7 @@
 * call、apply、bind
 * ...
 
-[前端算法入门一：刷算法题常用的JS基础扫盲](https://juejin.cn/post/7087134135193436197)
+> [前端算法入门一：刷算法题常用的JS基础扫盲](https://juejin.cn/post/7087134135193436197)<br>
 [解锁多种JavaScript数组去重姿势](https://juejin.cn/post/6844903608467587085)
 
 ## 性能差异
@@ -80,7 +80,7 @@
 
 ## 函数执行过程(重点，可以考虑再拆分下)
 
-[JavaScript函数执行过程](https://juejin.cn/post/6847902222144159752)
+> [JavaScript函数执行过程](https://juejin.cn/post/6847902222144159752)
 
 ## JS的继承
 
@@ -91,12 +91,12 @@
 * 组合继承
 * 寄生组合式继承
 
-[js类和继承](https://github.com/ziyi2/js/blob/master/JS%E7%B1%BB%E5%92%8C%E7%BB%A7%E6%89%BF.md)
+> [js类和继承](https://github.com/ziyi2/js/blob/master/JS%E7%B1%BB%E5%92%8C%E7%BB%A7%E6%89%BF.md)<br>
 [js寄生组合式继承](https://blog.csdn.net/qq_26222859/article/details/77508778)
 
 ## ES5 和 ES6 继承的区别
 
-[js类和继承](https://github.com/ziyi2/js/blob/master/JS%E7%B1%BB%E5%92%8C%E7%BB%A7%E6%89%BF.md)
+> [js类和继承](https://github.com/ziyi2/js/blob/master/JS%E7%B1%BB%E5%92%8C%E7%BB%A7%E6%89%BF.md)
 
 ## 垃圾回收机制
 
@@ -117,7 +117,7 @@
 
 常见的内存泄露主要有 4 种,全局变量、闭包、DOM 元素的引用、定时器。
 
-[内存泄漏的原因及解决办法_浅谈 JS 内存泄漏问题](https://blog.csdn.net/weixin_39849287/article/details/110963792)
+> [内存泄漏的原因及解决办法_浅谈 JS 内存泄漏问题](https://blog.csdn.net/weixin_39849287/article/details/110963792)
 
 ## import 和 exports
 
@@ -125,4 +125,4 @@
 
 ## PWA 和 Service Worker
 
-[面试官：请你实现一个PWA 我：😭](https://juejin.cn/post/6844904052166230030)
+> [面试官：请你实现一个PWA 我：😭](https://juejin.cn/post/6844904052166230030)

@@ -10,7 +10,7 @@ BOM  指的是浏览器对象模型，它指的是把浏览器当做一个对象
 的核心是 window，而 window 对象具有双重角色，它既是通过 js 访问浏览器窗口的一个接口，又是一个 Global（全局）
 对象。
 
-[JavaScript学习总结（三）BOM和DOM详解](https://segmentfault.com/a/1190000000654274#articleHeader21)
+> [JavaScript学习总结（三）BOM和DOM详解](https://segmentfault.com/a/1190000000654274#articleHeader21)
 
 # 3. 三种事件模型
 
