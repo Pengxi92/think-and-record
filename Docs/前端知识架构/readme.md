@@ -14,6 +14,10 @@
 * [4.CSS](./base/CSS.md)
 * [5.JavaScript](./base/JavaScript.md)
 
+## 进阶
+
+* [1.TypeScript](./%E8%BF%9B%E9%98%B6/TypeScript.md)
+
 # 参考
 
 * [做了一份前端面试复习计划，保熟～](https://juejin.cn/post/7061588533214969892)
