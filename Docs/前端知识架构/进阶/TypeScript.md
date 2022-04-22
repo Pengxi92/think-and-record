@@ -55,6 +55,8 @@ var Enum;
 * type无法被实现implements，而interface可以被派生类实现
 * type重名会抛出错误，interface重名是会产生合并
 
+> [type 与 interface 的区别，你真的懂了吗？](https://mp.weixin.qq.com/s/J6xHq9g91_TLgQLE6P_Teg)
+
 ## 其他类型
 
 ```ts
@@ -228,3 +230,31 @@ type Foo = {
 const a: Required<Foo> = {a: 'qwe'} // Error
 const b: Required<Foo> = {a: '23', b: 1, c: false}; // Ok
 ```
+
+## 体操库
+
+```ts
+type DeepKeyOf<T> = T extends Record<string, any> ? {
+    [k in keyof T]: k extends string ? k | `${k}.${DeepKeyOf<T[k]>}` : never;
+}[keyof T] : never;
+
+interface Stu {
+  name: string;
+  nest: {
+    a: {
+      b: number;
+    };
+    tt: {
+      c: boolean;
+    };
+  };
+  info: {
+    score: number;
+    grade: string;
+  };
+}
+
+type res = DeepKeyOf<Stu>; // "name" | "nest" | "info" | "nest.a" | "nest.tt" | "nest.a.b" | "nest.tt.c" | "info.score" | "info.grade"
+```
+
+> [TS类型体操入门 —— 实现DeepKeyOf](https://mp.weixin.qq.com/s/ulElvX8zkSgPCGCKGMTIxQ)
