@@ -13,6 +13,10 @@
 * [Promise](./base/Promise.md)
 * [flat](./base/flat.md)
 
+## 算法
+
+* [最大公共前缀](./%E7%AE%97%E6%B3%95/%E6%9C%80%E5%A4%A7%E5%85%AC%E5%85%B1%E5%89%8D%E7%BC%80.md)
+
 # 参考
 
 * [前端进阶高薪必看-手写源码篇](https://juejin.cn/post/6844904153437700103)
