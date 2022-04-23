@@ -11,6 +11,7 @@
 * [new操作符](./base/new%E6%93%8D%E4%BD%9C%E7%AC%A6.md)
 * [instanceof](./base/instanceof.md)
 * [Promise](./base/Promise.md)
+* [flat](./base/flat.md)
 
 # 参考
 
