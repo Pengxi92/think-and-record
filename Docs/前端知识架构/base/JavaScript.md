@@ -52,6 +52,13 @@
 
 ## 对象属性判断
 
+* for in 遍历 自身的属性 和 自身继承的可枚举的属性 的值和方法 ， 不能得到symbol 的值
+* hasOwnProperty() 过滤掉原型链上的属性
+* Object.keys() 返回自身的可枚举的属性值，不含symbol
+* Object.getOwnPropertyNames() 访问到除symbol以外的所有的（自身的）的属性
+* Object.getOwnPropertySymbols() 遍历到所有的自身的symbol
+* Reflect.ownKeys() 返回 自身的 所有的不管是不是可枚举的，也不管是不是symbol的，都可以遍历得到
+
 > [对象属性的遍历方法(最全)](https://blog.csdn.net/qq_48386796/article/details/117334476)
 ## 性能差异
 
