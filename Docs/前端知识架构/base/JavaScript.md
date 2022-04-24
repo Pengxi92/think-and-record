@@ -50,6 +50,9 @@
 > [前端算法入门一：刷算法题常用的JS基础扫盲](https://juejin.cn/post/7087134135193436197)<br>
 [解锁多种JavaScript数组去重姿势](https://juejin.cn/post/6844903608467587085)
 
+## 对象属性判断
+
+> [对象属性的遍历方法(最全)](https://blog.csdn.net/qq_48386796/article/details/117334476)
 ## 性能差异
 
 * 考察 for、for...of、for...in、forEach、while、do...while等
