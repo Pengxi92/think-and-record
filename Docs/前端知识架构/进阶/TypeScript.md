@@ -231,6 +231,60 @@ const a: Required<Foo> = {a: 'qwe'} // Error
 const b: Required<Foo> = {a: '23', b: 1, c: false}; // Ok
 ```
 
+## 映射
+
+TypeScript 4.1 版本允许我们使用 as 子句对映射类型中的键进行重新映射。它的语法如下：
+
+```ts
+type MappedTypeWithNewKeys<T> = {
+    [K in keyof T as NewKeyType]: T[K]
+    //            ^^^^^^^^^^^^^
+    //            这是新的语法！
+}
+```
+
+* 用于为对象类型生成对应的 Getter 类型
+
+```ts
+type Getters<T> = {
+  [K in keyof T as `get${Capitalize<string & K>}`]: () => T[K]
+};
+
+interface Person {
+    name: string;
+    age: number;
+    location: string;
+}
+
+type LazyPerson = Getters<Person>;
+// {
+//   getName: () => string;
+//   getAge: () => number;
+//   getLocation: () => string;
+// }
+```
+
+* 通过返回 never 类型对键进行过滤
+
+```ts
+// Remove the 'kind' property
+type RemoveKindField<T> = {
+    [K in keyof T as Exclude<K, "kind">]: T[K]
+};
+
+interface Circle {
+    kind: "circle";
+    radius: number;
+}
+
+type KindlessCircle = RemoveKindField<Circle>;
+//   type KindlessCircle = {
+//       radius: number;
+//   };
+```
+
+> [用了 TS 映射类型，同事直呼内行！](https://juejin.cn/post/7089943758543781896)
+
 ## 体操库
 
 ```ts
