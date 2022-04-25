@@ -6,7 +6,101 @@
 
 ## $nextTick
 
-> [你真的理解$nextTick么](https://juejin.cn/post/6844903843197616136)
+* Vue的更新是异步的且批量的
+
+> 只要观察到数据变化，Vue将开启一个队列，并缓冲在同一事件循环中发生的所有数据改变。如果同一个watcher被多次触发，只会被推入到队列中一次。这种在缓冲时去除重复数据对于避免不必要的计算和DOM操作上非常重要。然后，在下一个的事件循环“tick”中，Vue刷新队列并执行实际 (已去重的) 工作。
+
+> vue进行DOM更新内部也是**调用nextTick来做异步队列控制**。
+
+```js
+export default {
+    name: 'nextTick',
+    data() {
+        return {
+            name: '前端南玖',
+            verse: '如若东山能再起，大鹏展翅上九霄',
+            count:0
+        }
+    },
+    mounted() {
+        this.name = 'front end'
+        this.verse = '世间万物都是空，功名利禄似如风'
+    },
+    updated() {
+        this.count++
+        console.log('update:',this.count)
+    }
+​
+}
+
+// updated仅会更新一次
+// update: 1
+```
+
+Vue源码解析（即数据更新通过dep.notify触发watch的update事件）：
+
+```js
+// watcher.js
+// 当依赖发生变化时，触发更新
+update() {
+  if(this.lazy) {
+    // 懒执行会走这里, 比如computed
+    this.dirty = true
+  }else if(this.sync) {
+    // 同步执行会走这里，比如this.$watch() 或watch选项，传递一个sync配置{sync: true}
+    this.run()
+  }else {
+    // 将当前watcher放入watcher队列， 一般都是走这里
+    queueWatcher(this)
+  }
+​
+}
+
+// scheduler.js
+export function queueWatcher (watcher: Watcher) {
+    const id = watcher.id
+
+    // 检验id是否存在，已经存在则直接跳过，不存在则标记在has中，用于下次检验
+    if (has[id] == null) {
+        has[id] = true;
+        if (!flushing) {
+            // 如果flushing为false， 表示当前watcher队列没有在被刷新，则watcher直接进入队列
+            queue.push(watcher);
+        } else {
+            // 如果watcher队列已经在被刷新了，这时候想要插入新的watcher就需要特殊处理
+            // 保证新入队的watcher刷新仍然是有序的
+            let i = queue.length - 1
+            while (i >= 0 && queue[i].id > watcher.id) {
+               i--
+            }
+            queue.splice(Math.max(i, index) + 1, 0, watcher);
+        }
+
+        // queue the flush
+        if (!waiting) {
+         // wating为false，表示当前浏览器的异步任务队列中没有flushSchedulerQueue函数
+         waiting = true
+         // 这就是我们常见的this.$nextTick
+         nextTick(flushSchedulerQueue)
+        }
+    }
+}
+```
+
+* nextTick
+
+> 而当我们自己调用nextTick的时候，它就在更新DOM的那个microtask后追加了我们自己的回调函数，从而确保我们的代码在DOM更新后执行
+
+> 对了控制的核心是microtask，用不用MutationObserver都行的。事实上，vue在2.5版本中已经删去了MO相关的代码，因为它是HTML5新增的特性，在iOS上尚有bug。那么最优的microtask策略就是Promise了，而令人尴尬的是，Promise是ES6新增的东西，也存在兼容问题呀~ 所以vue就面临一个降级策略。**如果原生不支持Promise，那么执行macrotask（宏任务）函数**。
+
+在vue2.5的源码中，macrotask降级的方案依次是：Promise、[setImmediate](https://developer.mozilla.org/zh-CN/docs/Web/API/Window/setImmediate)、[MessageChannel](https://developer.mozilla.org/zh-CN/docs/Web/API/MessageChannel)、setTimeout。
+
+vue2.6的源码中，macrotask降级的方案依次是：Promise -> MutationObserver -> setImmediate -> setTimeout
+
+vue3 中不再做兼容性处理，直接使用的就是promise.then
+
+> [你真的理解$nextTick么](https://juejin.cn/post/6844903843197616136)<br>
+[全面解析Vue.nextTick实现原理](https://juejin.cn/post/6844903590293684231)
 
 ## Vuex
 
