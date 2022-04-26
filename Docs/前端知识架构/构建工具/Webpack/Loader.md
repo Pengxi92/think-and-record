@@ -67,8 +67,8 @@ Webpack 提供的几点指南，它们按重要程度排序，注意其中有些
   不应该在 loader 中保留状态。
 
 * Loader 实用工具
-  * loader-utils
-  * schema-utils
+  * loader-utils 常见用于获取Loader中的option配置项
+  * schema-utils 常见用于option配置项的校验
 
 ## loader 的依赖
 
