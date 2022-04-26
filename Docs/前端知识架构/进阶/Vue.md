@@ -4,6 +4,20 @@
 
 > [官方文档：生命周期](https://ustbhuangyi.github.io/vue-analysis/v2/components/lifecycle.html#beforecreate-created)
 
+## 组件间传值
+
+> [vue中8种组件通信方式, 值得收藏!](https://juejin.cn/post/6844903887162310669)
+## Vuex
+
+Vuex 主要用于 Vue，和 Flux，Redux 的思想很类似。
+
+* Vuex 里面有一个全局的 Store，包含着应用中的状态 State
+* 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation。
+* 对比Redux的中间件，Vuex 加入了 Action 这个东西来处理异步。
+
+> [Vuex、Flux、Redux、Redux-saga、Dva、MobX](https://zhuanlan.zhihu.com/p/53599723)
+
+# 进阶&源码解析
 ## $nextTick
 
 * Vue的更新是异步的且批量的
@@ -101,22 +115,6 @@ vue3 中不再做兼容性处理，直接使用的就是promise.then
 
 > [你真的理解$nextTick么](https://juejin.cn/post/6844903843197616136)<br>
 [全面解析Vue.nextTick实现原理](https://juejin.cn/post/6844903590293684231)
-
-## Vuex
-
-Vuex 主要用于 Vue，和 Flux，Redux 的思想很类似。
-
-* Vuex 里面有一个全局的 Store，包含着应用中的状态 State
-* 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation。
-* 对比Redux的中间件，Vuex 加入了 Action 这个东西来处理异步。
-
-> [Vuex、Flux、Redux、Redux-saga、Dva、MobX](https://zhuanlan.zhihu.com/p/53599723)
-
-## 组件间传值
-
-> [vue中8种组件通信方式, 值得收藏!](https://juejin.cn/post/6844903887162310669)
-
-# 进阶
 
 ## MVVM
 
