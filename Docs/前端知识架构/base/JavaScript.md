@@ -30,15 +30,76 @@
 
 > [JavaScript-强制类型转换](https://juejin.cn/post/6855920843260690440)
 
-## 0.1 + 0.2 === 0.3
+## Number
+
+### 0.1 + 0.2 === 0.3
 
 > [一次Javascript的计算浮点数精度问题记录](https://juejin.cn/post/6944243108410458149)
 
+## Object
+
+### Object.defineProperty()
+
+> [Object.defineProperty()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty)方法会直接在一个对象上定义一个新属性，或者修改一个对象的现有属性，并返回此对象。
+
+```js
+Object.defineProperty(obj, prop, descriptor);
+```
+
+descriptor，要定义或修改的属性描述符。包含以下两大类：
+
+* 数据描述符
+  * configurable true，表示该属性的描述符能被改变，该属性也能被删除。默认为false
+  * enumerable true，表示为可枚举。默认为false
+  * value 属性的值。默认为undefined
+  * writable true，表示该属性能通过赋值运算符改写。默认为false
+
+* 存取描述符
+  * get 属性的 getter 函数
+  * set 属性的 setter 函数
+
+### 对象的遍历 & 属性判断
+
+* for in 遍历 自身的属性 和 自身继承的可枚举的属性 的值和方法 ， 不能得到symbol 的值
+* hasOwnProperty() 过滤掉原型链上的属性
+* Object.keys() 返回自身的可枚举的属性值，不含symbol
+* Object.getOwnPropertyNames() 访问到除symbol以外的所有的（自身的）的属性
+* Object.getOwnPropertySymbols() 遍历到所有的自身的symbol
+* Reflect.ownKeys() 返回 自身的 所有的不管是不是可枚举的，也不管是不是symbol的，都可以遍历得到
+
+> [对象属性的遍历方法(最全)](https://blog.csdn.net/qq_48386796/article/details/117334476)
+
+### 原型链
+
+![](https://img-blog.csdnimg.cn/20190311194017886.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NjMTg4Njg4NzY4Mzc=,size_16,color_FFFFFF,t_70#pic_center)
+
+* __proto__和constructor属性是对象所独有的
+* prototype属性是函数所独有的，因为函数也是一种对象，所以函数也拥有__proto__和constructor属性
+* prototype属性的作用就是让该函数所实例化的对象们都可以找到公用的属性和方法，即f1.__proto__ === Foo.prototype
+* constructor属性的含义就是指向该对象的构造函数，所有函数（此时看成对象了）最终的构造函数都指向Function
+
+> [帮你彻底搞懂JS中的prototype、__proto__与constructor（图解）](https://blog.csdn.net/cc18868876837/article/details/81211729)
+
+### 对象继承
+
+* 原型链继承
+* 构造继承
+* 实例继承 Object.craete
+* 拷贝继承
+* 组合继承
+* 寄生组合式继承
+* Class（ES6的方案）
+
+> [js类和继承](https://github.com/ziyi2/js/blob/master/JS%E7%B1%BB%E5%92%8C%E7%BB%A7%E6%89%BF.md)<br>
+[js寄生组合式继承](https://blog.csdn.net/qq_26222859/article/details/77508778)
+
 ## 函数相关
 
-* arguments
-* new操作符
-* ...
+### arguments
+
+### new 操作符
+
+> [模拟-new操作符](../../code/base/new操作符.md)
 
 ## 常用函数
 
@@ -51,26 +112,9 @@
 > [前端算法入门一：刷算法题常用的JS基础扫盲](https://juejin.cn/post/7087134135193436197)<br>
 [解锁多种JavaScript数组去重姿势](https://juejin.cn/post/6844903608467587085)
 
-## 对象属性判断
-
-* for in 遍历 自身的属性 和 自身继承的可枚举的属性 的值和方法 ， 不能得到symbol 的值
-* hasOwnProperty() 过滤掉原型链上的属性
-* Object.keys() 返回自身的可枚举的属性值，不含symbol
-* Object.getOwnPropertyNames() 访问到除symbol以外的所有的（自身的）的属性
-* Object.getOwnPropertySymbols() 遍历到所有的自身的symbol
-* Reflect.ownKeys() 返回 自身的 所有的不管是不是可枚举的，也不管是不是symbol的，都可以遍历得到
-
-> [对象属性的遍历方法(最全)](https://blog.csdn.net/qq_48386796/article/details/117334476)
 ## 性能差异
 
 * 考察 for、for...of、for...in、forEach、while、do...while等
-
-## 如何提升 JavaScript 变量的存储性能
-
-* 访问字面量和局部变量的速度最快，访问数组元素和对象成员相对较慢
-* 由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快，全局变量的访问速度最慢
-* 属性和方法在原型链中的位置越深，则访问它的速度也越慢
-* ...
 
 ## ES6新增属性
 
@@ -93,21 +137,12 @@
 
 > [JavaScript函数执行过程](https://juejin.cn/post/6847902222144159752)
 
-## JS的继承
+## 如何提升 JavaScript 变量的存储性能
 
-* 原型链继承
-* 构造继承
-* 实例继承 Object.craete
-* 拷贝继承
-* 组合继承
-* 寄生组合式继承
-
-> [js类和继承](https://github.com/ziyi2/js/blob/master/JS%E7%B1%BB%E5%92%8C%E7%BB%A7%E6%89%BF.md)<br>
-[js寄生组合式继承](https://blog.csdn.net/qq_26222859/article/details/77508778)
-
-## ES5 和 ES6 继承的区别
-
-> [js类和继承](https://github.com/ziyi2/js/blob/master/JS%E7%B1%BB%E5%92%8C%E7%BB%A7%E6%89%BF.md)
+* 访问字面量和局部变量的速度最快，访问数组元素和对象成员相对较慢
+* 由于局部变量存在于作用域链的起始位置，因此访问局部变量比访问跨作用域变量更快，全局变量的访问速度最慢
+* 属性和方法在原型链中的位置越深，则访问它的速度也越慢
+* ...
 
 ## 垃圾回收机制
 
