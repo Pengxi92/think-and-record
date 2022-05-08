@@ -26,3 +26,5 @@
 
 * [前端进阶高薪必看-手写源码篇](https://juejin.cn/post/6844904153437700103)
 * [常见面试手写系列](https://github.com/qianlongo/fe-handwriting)
+* [前端算法入门三：5大排序算法&2大搜索&4大算法思想](https://juejin.cn/post/7088725301974269960)
+* [前端算法面试（高频题库&题目解析）](https://github.com/hovinghuang/fe-agorithm-interview)
