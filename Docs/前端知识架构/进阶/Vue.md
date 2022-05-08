@@ -358,7 +358,120 @@ Virtual DOM 的更新，就是根据 type 生成对应的 DOM，把 data 里定�
 
 > [Vue Virtual DOM 源码剖析](https://ustbhuangyi.github.io/vue-analysis/v2/data-driven/virtual-dom.html)
 
-## Virtual DOM diff
+### Virtual DOM 创建
+
+虚拟dom的渲染流程如下：template -> render渲染函数 ->虚拟DOM（VNode）-> 真实DOM -> 浏览器展示
+
+* 创建虚拟dom对象（构造函数）
+
+```js
+class VNnode {
+    //构造函数
+    //一个节点会有标签（tag）属性（props）value，标签类型
+    constructor(tag, props, value, type) {
+        //标签名转小写
+        this.tag = tag && tag.toLowerCase()
+        this.props= props
+        this.value = value
+        this.type = type
+        this.children = []
+    }
+    //追加子元素
+    appendChild(vnode) {
+        this.children.push(vnode)
+    }
+}
+```
+
+* 生成虚拟DOM
+
+针对文本节点和非文本节点分别进行处理。
+
+```js
+//使用递归来变量DOM元素，生成虚拟DOM
+//vue源码使用栈结构 ，用栈结构存储父元素来实现递归
+function getVNode(node) {
+    //获取节点类型
+    let nodeType = node.nodeType
+    //定义虚拟DOM
+    let _vnode = null
+    ///nodeType 为一表示标签节点
+    if (nodeType === 1) {
+        let nodeName = node.nodeName
+        //节点属性
+        let attrs = node.attributes
+        //获取props
+        let _attrObj = {}
+        //遍历所有节点
+        for (let i = 0; i < attrs.length; i++) {
+        _attrObj[attrs[i].nodeName] = attrs[i].nodeValue
+        }
+        //nodeName标签名 ,_attrObj 属性 第三位value  nodeType 标签类
+        // <div></div>,标签节点,中间的value是文本节点,所有value是undefined
+        //生成虚拟DOM
+        _vnode = new VNnode(nodeName, _attrObj, undefined, nodeType)
+
+        //node的子节点
+        let childNodes = node.childNodes
+        // 打印验证生成的子节点
+        //console.log(childNodes)
+        //子节点进行循环遍历生成虚拟DOM
+        for (let i = 0; i < childNodes.length; i++) {
+        _vnode.appendChild(getVNode(childNodes[i]))
+        }
+    }
+    //文本节点
+    //<div>哈哈哈</div> 中间的哈哈哈才能表示文本节点,所以标签名和属性时undefined
+    else if (nodeType === 3) {
+        _vnode = new VNnode(undefined, undefined, node.nodeValue, nodeType)
+    }
+    return _vnode
+}
+
+// 传入根节点
+let root = document.querySelector('.root')
+//转换为虚拟DOM
+let vroot = getVNode(root)
+```
+
+* 将虚拟DOM生成真正的DOM
+
+```js
+//逆转第二步骤
+function parseVNode(vnode) {
+    //获取类型
+    let type = vnode.type
+    //定义真实DOM
+    let _node = null
+    //文本节点
+    if (type === 3) {
+        return document.createTextNode(vnode.value) //创建文本节点
+    } else if (type === 1) {
+        //元素节点
+        _node = document.createElement(vnode.tag) // 创建元素标签名
+        //1.属性
+        let props = vnode.props //props此时为键值对 即还原 class = 'value'
+        Object.keys(props).forEach((key) => {
+            let attrName = key //属性名
+            let attrValue = props[key] //属性值
+            //绑定标签的属性值
+            _node.setAttribute(attrName, attrValue)
+        })
+        //2.子节点
+        let children = vnode.children
+        console.log(children)
+        //遍历子节点 ,子节点此时为虚拟DOM
+        children.forEach((subvnode) => {
+            _node.appendChild(parseVNode(subvnode)) //调用转换真实DOM函数,递归转换为子元素
+        })
+        return _node
+    }
+}
+```
+
+> [两种方法实现vue的虚拟DOM](https://www.jianshu.com/p/0a779ac12a7e)
+
+### Virtual DOM diff
 
 我们先根据真实DOM生成一颗virtual DOM，当virtual DOM某个节点的数据改变后会生成一个新的Vnode，然后Vnode和oldVnode作对比，发现有不一样的地方就直接修改在真实的DOM上，然后使oldVnode的值为Vnode。
 
