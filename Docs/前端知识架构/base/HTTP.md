@@ -1,10 +1,30 @@
-# HTTP概览
+# HTTP演进历史
 
 * HTTP/0.9：GET，无状态的特点形成
 
 * HTTP/1.0：支持 POST，HEAD，添加了请求头和响应头，支持任何格式的文件发送，添加了状态码、多字符集支持、多部分发送、权限、缓存、内容编码等
 
-* HTTP/1.1：默认长连接，同时 6 个 TCP 连接，CDN 域名分片
+* HTTP/1.1：
+  * 缓存处理，引入了tag等协商缓存策略
+  * 带宽优化及网络连接的使用，使用range进行资料分片
+  * 长连接，默认开启keep-alive，在一个TCP连接上可以传送多个HTTP请求和响应，减少了建立和关闭连接的消耗和延迟
+
+* HTTP/2.0：多路复用（一次 TCP 连接可以处理多个请求），服务器主动推送，stream 传输
+  * 新的二进制格式，协议解析决定采用二进制格式
+  * 多路复用，每一个request都是是用作连接共享机制的
+  * header压缩，通讯双方各自cache一份header fields表
+  * 服务端推送
+
+> HTTP2.0的多路复用和HTTP1.X中的长连接复用有什么区别？<br>
+HTTP/1.1 Pipeling解决方式为，**若干个请求排队串行化单线程处理**，后面的请求等待前面请求的返回才能获得执行机会，一旦有某请求超时等，后续请求只能被阻塞，毫无办法，也就是人们常说的线头阻塞;HTTP/2多个请求可同时在**一个连接上并行执行**。某个请求任务耗时严重，不会影响到其它连接的正常执行；
+
+![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/eff83eaed19e4823ae51886af64bd86e~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp)
+
+> [HTTP1.0、HTTP1.1 和 HTTP2.0 的区别](https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A?)
+
+* HTTP/3：基于 UDP 实现了 QUIC 协议
+  * 避免包阻塞，不同的流之间的数据传输真正实现了相互独立互不干扰，某个流的数据包在出问题需要重传时，并不会对其他流的数据包传输产生影响。
+  * 快速重启会话，普通基于tcp的连接，是基于两端的ip和端口和协议来建立的。在网络切换场景，例如手机端切换了无线网，使用4G网络，会改变本身的ip，这就导致tcp连接必须重新创建。而QUIC协议使用特有的UUID来标记每一次连接，**在网络环境发生变化的时候，只要UUID不变，就能不需要握手，继续传输数据**。
 
 * HTTPS：HTTP + TLS（ 非对称加密 与 对称加密 ）
 
@@ -16,15 +36,18 @@
   6. 服务端将客户端私钥和内容进行对称加密，并将加密内容发送给客户端
   7. 客户端收到加密内容后，通过客户端私钥进行对称解密，得到内容
 
-* HTTP/2.0：多路复用（一次 TCP 连接可以处理多个请求），服务器主动推送，stream 传输
-
-* HTTP/3：基于 UDP 实现了 QUIC 协议
-
 > [前端基础篇之HTTP协议](https://juejin.cn/post/6844903844216832007)<br>
 [（建议精读）HTTP灵魂之问，巩固你的 HTTP 知识体系](https://juejin.cn/post/6844904100035821575)<br>
-[HTTP1.0、HTTP1.1 和 HTTP2.0 的区别](https://mp.weixin.qq.com/s/GICbiyJpINrHZ41u_4zT-A?)
 
 # HTTP基础
+
+## http缺点
+
+* 无状态
+
+* 明文传输
+
+* 队头阻塞问题
 
 ## TCP 和 UDP的差别
 
@@ -38,7 +61,13 @@
 
 用于HTTP协议交互的信息被称为HTTP报文。客户端的HTTP报文叫请求报文，服务端的HTTP报文叫响应报文。
 
-请求报文 是由请求行（请求方法、协议版本）、请求首部（请求URI、客户端信息等）和内容实体（用户信息和资源信息等，可为空）构成。
+请求报文 是由请求行（请求方法、请求URI、协议版本）、请求首部、内容实体（用户信息和资源信息等，可为空）、空行构成。
+
+* 请求行，方法 + 路径 + http版本
+
+```http
+GET /home HTTP/1.1
+```
 
 ## GET和POST的区别
 
@@ -62,7 +91,7 @@ GET 和 POST 方法没有实质区别，只是报文格式不同。
   * origin 当前请求的域名
   * referer 请求发起页面的原始URI
   * User-Agent 客户端信息
-* 相应首部
+* 响应首部
   * Content-Length 相应内容实体的大小，即用十进制数字表示的八位元组的数目
   * Content-Type 相应内容实体的格式
   * Location 客户端重定向到某个 URL
@@ -111,14 +140,36 @@ CDN全称Content Delivery Network，即内容分发网络。其基本思路是�
 * localStorage
 * sessionStorage
 
-> [腾讯三面：Cookie的SameSite了解吧，那SameParty呢？](https://juejin.cn/post/7087206796351242248)<br>
-[面试官 -- 跨域请求如何携带 cookie ?](https://mp.weixin.qq.com/s/zE0iG0DNs52hyf3LrLXIbA) (注：评论说在IOS和低版本IE上可能不兼容)
+## cookie属性
+
+* 生存周期，Expires和Max-Age
+* 作用域，Domain和path
+* 安全相关
+  * Secure，只能通过https传递cookie
+  * HttpOnly，不能通过 JS 访问
+  * SameSite，值为Strict、Lax和None，用于是否禁止第三方请求携带Cookie
+  * SameParty，定义域名集合，集合内可传递cookie [腾讯三面：Cookie的SameSite了解吧，那SameParty呢？](https://juejin.cn/post/7087206796351242248)
+
+> [面试官 -- 跨域请求如何携带 cookie ?](https://mp.weixin.qq.com/s/zE0iG0DNs52hyf3LrLXIbA) (注：评论说在IOS和低版本IE上可能不兼容)
 
 # 同源政策及跨域
 
 [同源政策及跨域解决方案简析](https://juejin.cn/post/6844903802303152142)
 
 # 缓存
+
+## 强缓存
+
+* Expires 缓存过期时间
+* Cache-Control 缓存控制，优先级高于Expires
+
+## 协商缓存
+
+* Last-Modified和If-Modified-Since，判断文件修改时间
+  * 如果本地打开缓存文件，即使没有对文件进行修改，但还是会造成 Last-Modified 被修改，服务端不能命中缓存导致发送相同的资源
+  * 因为 Last-Modified 只能以秒计时，如果在不可感知的时间内修改完成文件，那么服务端会认为资源还是命中了，不会返回正确的资源
+
+* ETag和If-None-Match，当前资源文件的一个唯一标识(由服务器生成)
 
 > [HTTP 缓存别再乱用了！推荐一个缓存设置的最佳姿势！](https://mp.weixin.qq.com/s/43pa04szJ2zU_IyVP4LraQ)<br>
 [深入理解浏览器的缓存机制](https://www.jianshu.com/p/54cc04190252)
@@ -140,7 +191,3 @@ websocket与Http协议一样度是基于tcp的，都属于应用层的协议，w
 # URL
 
 > [url的hash和HTML5的history模式](https://blog.csdn.net/weixin_43974265/article/details/112762367)
-
-# 经典问题
-
-> [从URL输入到页面展现到底发生什么？](https://juejin.cn/post/6844903784229896199)
