@@ -19,6 +19,7 @@
 * [1.TypeScript](./%E8%BF%9B%E9%98%B6/TypeScript.md)
 * [微前端](./%E8%BF%9B%E9%98%B6/%E5%BE%AE%E5%89%8D%E7%AB%AF.md)
 * [包管理工具](./%E8%BF%9B%E9%98%B6/%E5%8C%85%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.md)
+* [埋点与监控](./%E8%BF%9B%E9%98%B6/%E5%9F%8B%E7%82%B9%E4%B8%8E%E7%9B%91%E6%8E%A7.md)
 
 ## 框架
 
