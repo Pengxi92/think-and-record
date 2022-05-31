@@ -7,3 +7,5 @@
 * 开发和生产环境下共享同一套 Rollup 插件机制，所以单个模块的编译在开发和生产环境下是一致的。
 
 ![](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/c549367d994a4af694e339770f8be521~tplv-k3u1fbpfcp-zoom-in-crop-mark:1304:0:0:0.awebp)
+
+> [Webpack 和 Rollup 有什么不一样？](https://www.modb.pro/db/386001)
