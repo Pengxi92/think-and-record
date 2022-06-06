@@ -140,6 +140,9 @@ CDN全称Content Delivery Network，即内容分发网络。其基本思路是�
 * localStorage
 * sessionStorage
 
+> [这一次带你彻底了解前端本地存储](https://www.cnblogs.com/songyao666/p/15492313.html)<br>
+[放弃localStorage,拥抱IndexedDB](https://zhuanlan.zhihu.com/p/95076534)
+
 ## cookie属性
 
 * 生存周期，Expires和Max-Age
