@@ -312,3 +312,27 @@ type res = DeepKeyOf<Stu>; // "name" | "nest" | "info" | "nest.a" | "nest.tt" | 
 ```
 
 > [TS类型体操入门 —— 实现DeepKeyOf](https://mp.weixin.qq.com/s/ulElvX8zkSgPCGCKGMTIxQ)
+
+## 3 种类型来源和 3 种模块语法
+
+TypeScript 给 JavaScript 添加了类型信息，在编译时做类型检查。
+
+除了在变量声明时定义类型外，TS 也支持通过 declare 单独声明类型。只存放类型声明的文件后缀是 d.ts。
+
+TypeScript 有三种存放类型声明的地方：
+
+* lib：内置的类型声明，包含 dom 和 es 的，因为这俩都是有标准的。
+* @types/xx：其他环境的 api 类型声明，比如 node，还有 npm 包的类型声明
+* 开发者写的代码：通过 include + exclude 还有 files 指定
+
+其中，npm 包也可以同时存放 ts 类型，通过 packages.json 的 types 字段指定路径即可。
+
+巧合的是，TS 声明模块的方式也是三种：
+
+* namespace：最早的实现模块的方式，编译为声明对象和设置对象的属性的 JS 代码，很容易理解
+* module：和 namespace 的 AST 没有任何区别，只不过一般用来声明 CommonJS 的模块，在 @types/node 下有很多
+* es module：es 标准的模块语法，ts 额外扩展了 import type
+
+dts 的类型声明默认是全局的，除非有 es module 的 import、export 的声明，这时候就要手动 declare global 了。为了避免这种情况，可以用 reference 的编译器指令。
+
+> [TypeScript 深水区：3 种类型来源和 3 种模块语法](https://mp.weixin.qq.com/s/AsTrGLhipd32RrNUFHuD5A)
